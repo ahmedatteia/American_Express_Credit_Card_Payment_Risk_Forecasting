@@ -1,135 +1,104 @@
 
-# American Express Credit Card Payment Risk Forecasting Project
+# American Express Credit Card Payment Risk Forecasting Using Machine Learning
 
-This repository contains code and resources for the **American Express Credit Card Payment Risk Forecasting Project**. The goal of this project is to predict credit card payment risk for American Express customers using machine learning models and real-world data.
+This project focuses on predicting credit card payment risk using machine learning techniques. Managing credit risk is critical for financial institutions, and this project aims to develop models that help predict whether a customer will default on their credit card payments.
 
-## Project Objective
+## Project Overview
 
-The objective of this project is to forecast the risk of credit card payment defaults by analyzing various customer features and transaction histories. 
+In this project, we explored various machine learning models to predict the likelihood of American Express customers defaulting on their credit card payments. Accurate credit risk prediction helps issuers make better lending decisions, optimizing both business performance and customer experience.
 
-The project involves the following key tasks:
+## Machine Learning Models Used:
 
-- Data preprocessing (handling missing values, encoding categorical data)
-- Feature correlation analysis
-- Building and evaluating machine learning models for risk prediction
-- Final model submission based on test data predictions
+- **Logistic Regression**:  
+  Logistic regression is a linear model that estimates the probability of a binary outcome (e.g., default or no default). It's commonly used when the relationship between the features and the target is roughly linear. This model works well with structured, tabular data and is ideal when interpretability is important.
 
-## Project Setup
+- **Decision Tree**:  
+  A decision tree is a model that splits the data into branches based on feature values, creating a set of decision rules. It is intuitive and easy to visualize, making it useful when you want a clear understanding of the decision-making process. Decision trees handle both numerical and categorical data.
 
-### Prerequisites
+- **Random Forest**:  
+  Random forest is an ensemble method that builds multiple decision trees and aggregates their predictions. It's particularly effective for reducing overfitting in decision trees and can handle both structured data and high-dimensional datasets. Random forests work well with numerical and categorical data.
 
-To run this project, you'll need to have the following software installed:
+- **Gradient Boosting Machines (GBM)**:  
+  GBM is a boosting technique that builds models sequentially by combining weak learners to create a strong model. It is useful for complex datasets where patterns are difficult to capture, and it works best with structured, numerical data. GBM is often used in competitions due to its high predictive accuracy.
 
-- **Python 3.8+**
-- **Anaconda/Miniconda** (optional but recommended)
-- **Jupyter Notebook** (for running the notebook in the development phase)
-- Libraries such as `pandas`, `numpy`, `scikit-learn`, `matplotlib`, `seaborn`, etc.
+- **LightGBM**:  
+  LightGBM is a gradient boosting framework optimized for speed and efficiency, especially with large datasets. It is well-suited for structured, tabular data and can handle both numerical and categorical features. LightGBM is preferred when working with large-scale datasets and high-dimensional features.
 
-### Installation
+- **XGBoost**:  
+  XGBoost is an optimized version of gradient boosting that delivers state-of-the-art performance in terms of both speed and accuracy. It works well for tabular data, both numerical and categorical. XGBoost is often the go-to model for structured datasets in machine learning competitions.
 
-1. Clone this repository:
+- **CatBoost**:  
+  CatBoost is a gradient boosting algorithm designed to handle categorical variables without the need for extensive preprocessing. It’s especially useful when dealing with datasets that have many categorical features and can be applied to both numerical and categorical data. CatBoost is known for its ease of use and strong performance.
+
+## Dataset Overview
+
+The dataset consists of aggregated customer profile data and transaction history over multiple months. It includes various features related to spending patterns, balances, payment history, and delinquency, which serve as predictors for whether a customer defaults.
+
+Key Features:
+
+- **D_***: Delinquency variables that track the customer's overdue payments.
+- **S_***: Spend variables that represent customer spending patterns.
+- **P_***: Payment variables that describe the customer’s payment history.
+- **B_***: Balance variables that track the customer’s current and past balances.
+- **R_***: Risk variables that capture various risk factors for each customer.
+
+Categorical features include variables such as B_30, B_38, D_63, D_64, D_66, and others, which require encoding or special handling before model training.
+
+## Project Objectives
+
+1. **Predict Payment Defaults**: Build machine learning models to predict whether customers will default on their credit card payments based on profile and transaction data.
+2. **Feature Correlation Analysis**: Understand the relationships between various customer features and payment risk.
+3. **Evaluate Model Performance**: Compare different models using metrics such as ROC-AUC, accuracy, and F1 score to identify the most effective model.
+4. **Handle Categorical Variables**: Properly encode or exclude categorical variables to ensure accurate predictions.
+
+## Data Preprocessing and Feature Engineering
+
+The dataset required several preprocessing steps to prepare it for model training:
+
+- **Missing Value Imputation**: Missing values were imputed using the `IterativeImputer` from `scikit-learn`.
+- **Categorical Encoding**: Categorical variables were handled using one-hot encoding or label encoding, depending on their nature.
+- **Scaling**: Features were scaled using StandardScaler to normalize the range of values.
+
+## Model Evaluation
+
+We trained and evaluated the following machine learning models to predict credit card payment risk:
+
+- **Logistic Regression**: A linear model used to estimate the probability of default based on feature relationships.
+- **Decision Tree**: A tree-based model that learns decision rules for predicting defaults.
+- **Random Forest**: An ensemble method that builds multiple decision trees and aggregates their predictions.
+- **Gradient Boosting Machines (GBM)**: A boosting method that combines weak learners to create a strong predictive model.
+- **LightGBM**: A highly efficient gradient boosting algorithm optimized for large datasets.
+- **XGBoost**: Another boosting algorithm known for its performance and speed.
+- **CatBoost**: A gradient boosting algorithm that handles categorical variables without extensive preprocessing.
+
+## Key Results
+
+- **Random Forest** achieved the highest ROC-AUC score, making it the best model for predicting payment defaults.
+- **LightGBM** and **XGBoost** also performed well, offering competitive results in terms of both speed and accuracy.
+
+## Future Work
+
+- **Feature Engineering**: Further feature engineering could be done to extract more meaningful insights from the dataset, such as analyzing time-based patterns in customer spending.
+- **Hyperparameter Tuning**: Fine-tuning model hyperparameters can improve the accuracy and robustness of the models.
+- **Real-Time Risk Prediction**: Implement real-time risk prediction using streaming platforms like Apache Kafka and Flink, enabling instant insights into customer risk profiles.
+- **Deployment**: Deploy the models to a production environment, allowing American Express to use them for day-to-day credit risk assessments.
+
+## How to Run the Code
+
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/credit-card-risk-forecasting.git
-   cd credit-card-risk-forecasting
+   git clone https://github.com/your-username/amex-credit-risk-forecasting.git
    ```
 
-2. Set up a virtual environment (optional but recommended):
-   ```bash
-   conda create -n amex-risk python=3.8
-   conda activate amex-risk
-   ```
-
-3. Install the required packages:
+2. **Install the required Python libraries**:
    ```bash
    pip install -r requirements.txt
    ```
 
-## Project Steps
+3. **Run the Jupyter notebook or Python script**:
+   ```bash
+   jupyter notebook credit_risk_forecasting.ipynb
+   ```
 
-### 1. Data Loading and Initial Exploration
-
-We load the dataset containing customer credit card transaction data. This includes features like transaction histories, balances, and credit scores.
-
-### 2. Data Preprocessing
-
-- **Handling missing values**: We use the `IterativeImputer` from the `scikit-learn` library to fill missing values in the dataset. This method allows us to impute missing data by predicting them based on other features.
-- **Encoding categorical features**: Categorical variables are either encoded as numerical values using one-hot encoding or excluded for correlation analysis.
-
-```python
-from sklearn.experimental import enable_iterative_imputer
-from sklearn.impute import IterativeImputer
-
-# Handling missing values
-imputer = IterativeImputer()
-train = imputer.fit_transform(train)
-```
-
-### 3. Feature Correlation Analysis
-
-Since the dataset contains both numerical and categorical data, correlation analysis is performed only on numerical features to identify important relationships with the target variable (credit card payment risk).
-
-```python
-# Select only numeric columns for correlation analysis
-train_numeric = train.select_dtypes(include=['number'])
-corr = train_numeric.corr()
-```
-
-### 4. Building Machine Learning Models
-
-- We utilize models such as Random Forest, Decision Trees, and Logistic Regression to forecast credit card payment risk.
-- The target variable represents the likelihood of a customer defaulting on a payment.
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(train_numeric, target, test_size=0.2, random_state=42)
-
-# Train a Random Forest model
-model = RandomForestClassifier()
-model.fit(X_train, y_train)
-```
-
-### 5. Model Evaluation
-
-Evaluate the model performance using metrics such as **AUC-ROC** and **Accuracy**. This helps determine how well the model is predicting credit card payment risk.
-
-```python
-from sklearn.metrics import roc_auc_score, accuracy_score
-
-# Make predictions and evaluate the model
-y_pred = model.predict(X_test)
-roc_score = roc_auc_score(y_test, y_pred)
-print(f"ROC-AUC Score: {roc_score}")
-```
-
-### 6. Final Submission
-
-Once the model is trained and evaluated, predictions are made on the test dataset, and the results are prepared for submission.
-
-```python
-# Make predictions on the test set
-y_pred_test = model.predict_proba(test)[:, 1]
-
-# Create a submission file
-submission_df = pd.DataFrame({'prediction': y_pred_test})
-submission_df.to_csv('submission.csv', index=False)
-```
-
-## Project Files
-
-- `American_Express_Project_with_Improved_Comments_and_Code.py`: Python script with code and detailed comments.
-- `American_Express_Project_Cleaned.py`: Cleaned version of the Python script.
-- `submission.csv`: Final submission file with predictions.
-- `requirements.txt`: List of dependencies.
-
-## Future Work
-
-1. **Feature Engineering**: Enhance features to improve model accuracy.
-2. **Hyperparameter Tuning**: Optimize model performance by tuning hyperparameters.
-3. **Deployment**: Deploy the trained model to a real-time environment using Flask or FastAPI.
-
-## Conclusion
-
-This project provides a full workflow for forecasting credit card payment risk using machine learning techniques. Through careful preprocessing, feature selection, and model evaluation, we can build an accurate predictive model to assist American Express in minimizing credit card payment risks.
+4. **Download the dataset**:
+   The dataset used in this project can be obtained from [Kaggle](https://www.kaggle.com/competitions/amex-default-prediction/data).
